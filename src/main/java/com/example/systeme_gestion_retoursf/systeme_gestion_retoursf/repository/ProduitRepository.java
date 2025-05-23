@@ -5,4 +5,6 @@ import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.models.Prod
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
+
 }
+

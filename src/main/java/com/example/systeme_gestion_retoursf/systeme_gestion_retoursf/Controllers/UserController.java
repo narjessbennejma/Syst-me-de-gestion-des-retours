@@ -5,20 +5,31 @@ import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.dto.SigninR
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.dto.SignupRequest;
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.models.User;
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.services.UserService;
+import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+
+    @Autowired
+    public UserController(UserService userService, JwtUtil jwtUtil) {
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
+    }
 
     // Créer un utilisateur
     @PostMapping
@@ -67,10 +78,20 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<User> signup(@RequestBody SignupRequest request) {
+    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
+        // Vérifie si l'email existe déjà
+        if (userService.emailExists(request.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Map.of("error", "Email already exists"));
+        }
+
+        // Si l'email est disponible, on continue l'inscription
         User user = userService.signup(request);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
+
+
+
 
     @PostMapping("/signin")
     public ResponseEntity<String> signin(@RequestBody SigninRequest request) {
@@ -79,5 +100,29 @@ public class UserController {
                 ? ResponseEntity.ok(token)
                 : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants incorrects");
     }
+
+    @GetMapping("/exists")
+    public ResponseEntity<Boolean> emailExists(@RequestParam String email) {
+        boolean exists = userService.emailExists(email);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<User> getProfile(@RequestHeader("Authorization") String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String token = authHeader.substring(7);
+
+        String email = jwtUtil.extractUsername(token);
+
+        Optional<User> user = userService.getUserByEmail(email);
+        return user.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
+
 
 }

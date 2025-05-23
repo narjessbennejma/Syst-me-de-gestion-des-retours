@@ -1,10 +1,14 @@
 package com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RetourProduit {
 
     @Id
@@ -22,39 +26,6 @@ public class RetourProduit {
 
     private LocalDate date;
 
-    public RetourProduit() {
-    }
-
-    public RetourProduit(Produit produit, User client, String raison, String etatTraitement, LocalDate date) {
-        this.produit = produit;
-        this.client = client;
-        this.raison = raison;
-        this.etatTraitement = etatTraitement;
-        this.date = date;
-    }
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
-
-    public Produit getProduit() { return produit; }
-
-    public void setProduit(Produit produit) { this.produit = produit; }
-
-    public User getClient() { return client; }
-
-    public void setClient(User client) { this.client = client; }
-
-    public String getRaison() { return raison; }
-
-    public void setRaison(String raison) { this.raison = raison; }
-
-    public String getEtatTraitement() { return etatTraitement; }
-
-    public void setEtatTraitement(String etatTraitement) { this.etatTraitement = etatTraitement; }
-
-    public LocalDate getDate() { return date; }
-
-    public void setDate(LocalDate date) { this.date = date; }
+    @ManyToOne
+    private Commande commande;
 }
-

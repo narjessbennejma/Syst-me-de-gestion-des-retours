@@ -40,8 +40,17 @@ public class UserService {
     // Mettre à jour un utilisateur
     public User updateUser(Long id, User updatedUser) {
         if (userRepository.existsById(id)) {
-            updatedUser.setId(id);
-            return userRepository.save(updatedUser);
+            Optional<User> existingUserOpt = userRepository.findById(id);
+            if (existingUserOpt.isPresent()) {
+                User existingUser = existingUserOpt.get();
+                existingUser.setNom(updatedUser.getNom());
+                existingUser.setEmail(updatedUser.getEmail());
+                existingUser.setPassword(updatedUser.getPassword());
+                existingUser.setRole(updatedUser.getRole());
+                return userRepository.save(existingUser);
+            }
+            return null;
+
         }
         return null;
     }
@@ -62,17 +71,25 @@ public class UserService {
 
     // Méthode pour créer un utilisateur avec un mot de passe hashé
     public User signup(SignupRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new IllegalArgumentException("Email already in use");
+        }
+
         User user = new User();
         user.setNom(request.getNom());
         user.setEmail(request.getEmail());
 
-        // Hasher le mot de passe avant de l'enregistrer
         String hashedPassword = passwordEncoder.encode(request.getPassword());
         user.setPassword(hashedPassword);
 
-        user.setRole(request.getRole());
+        // Définir "USER" comme rôle par défaut si non fourni
+        String role = request.getRole();
+        user.setRole((role == null || role.trim().isEmpty()) ? "USER" : role);
+
         return userRepository.save(user);
     }
+
+
 
     // Méthode pour authentifier un utilisateur
     public String signin(SigninRequest request) {
@@ -82,13 +99,20 @@ public class UserService {
 
             // Vérifier si le mot de passe correspond au hash stocké
             if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                return jwtUtil.generateToken(user.getEmail());
+                return jwtUtil.generateToken(user.getId(),user.getEmail(), user.getRole());
             }
         }
         return null;
     }
+    public boolean emailExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
 
 
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
 
 }

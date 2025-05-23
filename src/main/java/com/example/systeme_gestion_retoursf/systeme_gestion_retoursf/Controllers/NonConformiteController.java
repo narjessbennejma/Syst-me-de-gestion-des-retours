@@ -1,6 +1,7 @@
 package com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.Controllers;
 
 
+import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.dto.NonConformiteDTO;
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.models.NonConformite;
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.models.User;
 import com.example.systeme_gestion_retoursf.systeme_gestion_retoursf.services.NonConformiteService;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/non-conformites")
 public class NonConformiteController {
@@ -21,9 +21,9 @@ public class NonConformiteController {
 
     // Création d'une non-conformité
     @PostMapping
-    public ResponseEntity<NonConformite> create(@RequestBody NonConformite nonConformite) {
-        NonConformite created = nonConformiteService.create(nonConformite);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    public ResponseEntity<NonConformite> createNonConformite(@RequestBody NonConformiteDTO dto) {
+        NonConformite created = nonConformiteService.createNonConformite(dto);
+        return ResponseEntity.ok(created);
     }
 
     // Récupérer toutes les non-conformités

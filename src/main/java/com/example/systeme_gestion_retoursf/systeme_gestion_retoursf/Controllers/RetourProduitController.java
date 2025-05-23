@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/api/retours")
 public class RetourProduitController {
 
@@ -52,12 +53,25 @@ public class RetourProduitController {
     @PutMapping("/{id}/etat")
     public ResponseEntity<RetourProduit> traiterRetour(
             @PathVariable Long id,
-            @RequestParam String etat) {
+            @RequestParam String etat,
+            @RequestParam Long userId) {
 
-        RetourProduit retour = service.traiterRetour(id, etat);
+        RetourProduit retour = service.traiterRetour(id, etat, userId);
         return ResponseEntity.ok(retour);
     }
 
+
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<RetourProduit>> getRetoursByClient(@PathVariable Long clientId) {
+        List<RetourProduit> retours = service.getRetoursByClient(clientId);
+        return ResponseEntity.ok(retours);
+    }
+
+    @GetMapping("/en-cours")
+    public ResponseEntity<List<RetourProduit>> getRetoursEnCours() {
+        List<RetourProduit> retours = service.getRetoursEnCours();
+        return ResponseEntity.ok(retours);
+    }
 
 }
 

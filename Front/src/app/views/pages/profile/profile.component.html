@@ -1,0 +1,42 @@
+<div *ngIf="user" class="profile-container">
+  <mat-card *ngIf="!loading" class="profile-card mat-elevation-z4">
+    <mat-card-title class="card-title">Modifier votre profil</mat-card-title>
+    <mat-divider class="line"></mat-divider>
+    <mat-card-content>
+      <form (ngSubmit)="updateProfile()" class="profile-form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nom complet</mat-label>
+          <input matInput [(ngModel)]="user.nom" name="nom" class="padding-text" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Adresse Email</mat-label>
+          <input matInput [(ngModel)]="user.email" name="email" type="email" class="padding-text" disabled />
+        </mat-form-field>
+
+        <div class="btn-wrapper">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+            {{ loading ? 'Mise à jour...' : 'Mettre à jour' }}
+          </button>
+        </div>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Erreur -->
+  <div *ngIf="error" class="error-message">
+    <mat-card class="error-card mat-elevation-z2">
+      <mat-card-title>Erreur</mat-card-title>
+      <mat-card-content>{{ error }}</mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Chargement -->
+<div *ngIf="loading && !user" class="loading">
+  <mat-spinner></mat-spinner>
+  <p>Chargement du profil...</p>
+</div>

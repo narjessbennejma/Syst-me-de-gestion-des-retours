@@ -1,0 +1,59 @@
+<h2 mat-dialog-title class="dialog-header">
+  <div class="title-container">
+    <i class="fas fa-box-open title-icon"></i>
+    <span>Ajouter un produit</span>
+  </div>
+  <button mat-icon-button class="close-button" (click)="onCancel()" aria-label="Fermer">
+    <i class="fas fa-times"></i>
+  </button>
+</h2>
+
+
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="produitForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Labelle</mat-label>
+      <input matInput formControlName="labelle">
+      <mat-error *ngIf="produitForm.controls['labelle'].hasError('required')">
+        Labelle est requis.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Prix</mat-label>
+      <input matInput type="number" formControlName="prix">
+      <mat-error *ngIf="produitForm.controls['prix'].hasError('required')">
+        Prix est requis.
+      </mat-error>
+      <mat-error *ngIf="produitForm.controls['prix'].hasError('min')">
+        Le prix doit être ≥ 0.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Stock</mat-label>
+      <input matInput type="number" formControlName="stock">
+      <mat-error *ngIf="produitForm.controls['stock'].hasError('required')">
+        Stock est requis.
+      </mat-error>
+      <mat-error *ngIf="produitForm.controls['stock'].hasError('min')">
+        Le stock doit être ≥ 0.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <div class="left-actions">
+    <button mat-stroked-button color="warn" (click)="onCancel()">
+      <i class="fas fa-ban"></i> Annuler
+    </button>
+  </div>
+
+  <div class="right-actions">
+    <button mat-flat-button class="save-button" (click)="onSave()" [disabled]="produitForm.invalid">
+      <i class="fas fa-save"></i> Sauvegarder
+    </button>
+  </div>
+</mat-dialog-actions>
+

@@ -1,0 +1,49 @@
+<mat-card class="non-conformite-card">
+  <mat-card-header>
+    <mat-card-title>
+      Créer une Non-Conformité
+    </mat-card-title>
+    <button mat-icon-button class="close-button" (click)="onCancel()" aria-label="Fermer">
+      <i class="fas fa-times"></i>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" class="form-container" (ngSubmit)="onCreate()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          rows="3"
+          placeholder="Décrivez la non-conformité..."
+        ></textarea>
+        <mat-error *ngIf="form.controls['description'].invalid && form.controls['description'].touched">
+          La description est obligatoire.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Gravité</mat-label>
+        <mat-select formControlName="gravite" placeholder="Sélectionnez la gravité">
+          <mat-option value="faible">🟢 Faible</mat-option>
+          <mat-option value="moyenne">🟠 Moyenne</mat-option>
+          <mat-option value="élevée">🔴 Élevée</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['gravite'].invalid && form.controls['gravite'].touched">
+          La gravité est obligatoire.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-group">
+       
+        <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+          Annuler
+        </button>
+         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Créer
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

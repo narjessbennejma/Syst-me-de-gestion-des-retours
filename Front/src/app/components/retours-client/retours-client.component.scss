@@ -1,0 +1,130 @@
+.retours-client-card {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  mat-card-title {
+    font-weight: 700;
+    font-size: 22px;
+    color: #2c3e50;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+
+  table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px #ddd;
+  }
+
+  th, td {
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #444;
+  }
+
+  th {
+    background-color: #f0f4f8;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fafbfd;
+  }
+
+  tr:hover {
+    background-color: #e8f0fe;
+    transition: background-color 0.3s ease;
+  }
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.no-data {
+  margin-top: 24px;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+}
+
+.error-msg {
+  margin-top: 24px;
+  font-size: 16px;
+  color: #d32f2f;
+  text-align: center;
+}
+
+/* Couleurs pour les états */
+.etat-en-cours {
+  color: #1565c0;  // bleu
+  font-weight: 600;
+  background-color: #e3f2fd;
+  padding: 4px 10px;
+  border-radius: 15px;
+  display: inline-block;
+  text-align: center;
+  min-width: 80px;
+}
+
+.etat-accepte {
+  color: #2e7d32;  // vert
+  font-weight: 600;
+  background-color: #c8e6c9;
+  padding: 4px 10px;
+  border-radius: 15px;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+
+.etat-refuse {
+  color: #c62828;  // rouge
+  font-weight: 600;
+  background-color: #ffcdd2;
+  padding: 4px 10px;
+  border-radius: 15px;
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+.etat-chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.etat-chip.en-cours {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.etat-chip.accepte {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.etat-chip.refuse {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

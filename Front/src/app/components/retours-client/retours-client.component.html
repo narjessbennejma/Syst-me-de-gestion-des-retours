@@ -1,0 +1,72 @@
+<mat-card class="retours-client-card">
+  <mat-card-header>
+    <mat-card-title>Mes Retours </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <div class="table-container" *ngIf="!loading && retours.length > 0">
+    <table mat-table [dataSource]="retours" class="mat-elevation-z2">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let retour">{{ retour.id }}</td>
+      </ng-container>
+
+      <!-- Produit -->
+      <ng-container matColumnDef="produit">
+        <th mat-header-cell *matHeaderCellDef>Produit</th>
+        <td mat-cell *matCellDef="let retour">{{ retour.produit.labelle || retour.produit.nom || '—' }}</td>
+      </ng-container>
+
+      <!-- Commande -->
+      <ng-container matColumnDef="commande">
+        <th mat-header-cell *matHeaderCellDef>Commande</th>
+        <td mat-cell *matCellDef="let retour">{{ retour.commande.id }}</td>
+      </ng-container>
+
+      <!-- Raison -->
+      <ng-container matColumnDef="raison">
+        <th mat-header-cell *matHeaderCellDef>Raison</th>
+        <td mat-cell *matCellDef="let retour">{{ retour.raison }}</td>
+      </ng-container>
+
+      <!-- Date -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let retour">{{ retour.date | date:'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <!-- État -->
+      <ng-container matColumnDef="etat">
+        <th mat-header-cell *matHeaderCellDef>État</th>
+        <td mat-cell *matCellDef="let retour">
+          <span class="etat-chip" [ngClass]="{
+            'en-cours': retour.etatTraitement === 'en_cours',
+            'accepte': retour.etatTraitement === 'accepte',
+            'refuse': retour.etatTraitement === 'refuse'
+          }">
+            {{
+              retour.etatTraitement === 'en_cours' ? 'En cours' :
+              retour.etatTraitement === 'accepte' ? 'Accepté' :
+              retour.etatTraitement === 'refuse' ? 'Refusé' :
+              '—'
+            }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Lignes -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="loading" class="loading-indicator">
+    <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+  </div>
+
+  <p *ngIf="!loading && retours.length === 0" class="no-data">Aucun retour trouvé pour ce client.</p>
+  <p *ngIf="error" class="error-msg">{{ error }}</p>
+</mat-card>

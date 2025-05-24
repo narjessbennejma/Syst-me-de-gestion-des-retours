@@ -1,0 +1,168 @@
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  border-radius: 8px;
+
+  table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+
+  tr:hover {
+    background-color: #eef5ff;
+  }
+
+ 
+
+  button {
+    margin-right: 4px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+mat-card {
+  padding: 24px;
+  border-radius: 10px;
+  background-color: #ffffff;
+
+  mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #2c3e50;
+  }
+}
+
+mat-divider {
+  margin: 8px 0 16px 0;
+  background-color: #ddd;
+  height: 2px;
+  border: none;
+}
+mat-icon {
+  font-size: 24px;  // Augmentez la taille de l'icône si nécessaire
+  color: #3f51b5;   // Vous pouvez changer la couleur des icônes
+}
+
+button {
+  margin: 5px;  // Espacement entre les boutons
+}
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 0 5px;
+  color: inherit;
+
+  i {
+    pointer-events: none;
+  }
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.card-header mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  padding: 10px 16px;
+  font-size: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease;
+  background-color: #1565c0 !important;
+  color: white !important;
+
+  i {
+    font-size: 14px;
+  }
+
+  &:hover {
+    background-color: #1565c0 !important; 
+    color: white !important;
+  }
+
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+.commander-btn {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  background-color: #1565c0 !important;
+  color: white !important;
+
+  i {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: #1565c0;
+    color: white;
+  }
+}
+
+button.btn-accepter {
+  background-color: #4caf50; // vert
+  color: white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #43a047;
+  }
+}
+
+button.btn-refuser {
+  background-color: #f44336; // rouge
+  color: white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e53935;
+  }
+}

@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-title>Liste des Utilisateurs</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <!-- Chargement -->
+  <div *ngIf="loading" class="text-center my-4">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Erreur -->
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!loading && users.length > 0" class="table-container">
+    <table mat-table [dataSource]="users" class="mat-elevation-z2">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+      </ng-container>
+
+      <!-- Nom -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let user"> {{ user.nom }} </td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['id', 'nom', 'email']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'nom', 'email']"></tr>
+    </table>
+  </div>
+
+  <!-- Aucune donnée -->
+  <p *ngIf="!loading && users.length === 0" class="no-data">Aucun utilisateur trouvé.</p>
+</mat-card>

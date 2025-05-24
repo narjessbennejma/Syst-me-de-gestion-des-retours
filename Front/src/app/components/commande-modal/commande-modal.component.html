@@ -1,0 +1,54 @@
+<h2 mat-dialog-title class="dialog-title">
+  Passer une commande
+  <button mat-icon-button class="close-button" (click)="close()" aria-label="Fermer">
+    <i class="fas fa-times"></i>
+  </button>
+</h2>
+
+
+<mat-dialog-content>
+  <div class="dialog-content">
+    <!-- Nom du produit (désactivé) -->
+    <mat-form-field class="width_input">
+      <mat-label>Nom du produit</mat-label>
+      <input matInput [value]="produit.labelle"  disabled />
+    </mat-form-field>
+
+    <!-- Prix du produit (désactivé) -->
+    <mat-form-field class="width_input">
+      <mat-label>Prix</mat-label>
+      <input matInput [value]="produit.prix | currency" disabled  />
+    </mat-form-field>
+
+    <!-- Stock disponible (désactivé) -->
+    <mat-form-field class="width_input">
+      <mat-label>Stock disponible</mat-label>
+      <input matInput [value]="produit.stock"  disabled />
+    </mat-form-field>
+
+    <!-- Quantité (modifiable) -->
+    <mat-form-field class="width_input">
+      <mat-label>Quantité</mat-label>
+      <input matInput type="number" [(ngModel)]="selectedQuantity" 
+             min="1" [max]="produit.stock" (ngModelChange)="updateTotalPrice()"  />
+    </mat-form-field>
+
+    <!-- Prix total (calculé dynamiquement) -->
+    <mat-form-field class="width_input" >
+      <mat-label>Prix total</mat-label>
+      <input matInput [value]="totalPrice | currency" disabled />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button class="close-btn" (click)="close()">
+    <i class="fas fa-times-circle"></i> Fermer
+  </button>
+  <button mat-button class="confirm-btn"
+          [disabled]="selectedQuantity < 1 || quantityExceeded"
+          (click)="commander()">
+    <i class="fas fa-cart-plus"></i> Commander
+  </button>
+</mat-dialog-actions>
+

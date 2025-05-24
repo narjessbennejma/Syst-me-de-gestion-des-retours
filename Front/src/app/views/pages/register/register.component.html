@@ -1,0 +1,75 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4 shadow-sm border-0 rounded">
+          <c-card-body class="p-5">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <h1 class="text-primary mb-2 fw-bold text-center">Créer un compte</h1>
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input
+                  formControlName="nom"
+                  type="text"
+                  placeholder="Nom"
+                  class="form-control rounded shadow-sm"
+                  [ngClass]="{'is-invalid': submitted && f['nom'].invalid}"
+                />
+                <div *ngIf="submitted && f['nom'].invalid" class="invalid-feedback">
+                  Nom est requis.
+                </div>
+              </c-input-group>
+
+              <c-input-group class="mb-4">
+                <span cInputGroupText>&#64;</span>
+                <input
+                  formControlName="email"
+                  type="email"
+                  placeholder="Email"
+                  class="form-control rounded shadow-sm"
+                  [ngClass]="{'is-invalid': submitted && f['email'].invalid}"
+                />
+                <div *ngIf="submitted && f['email'].invalid" class="invalid-feedback">
+                  Email valide est requis.
+                </div>
+              </c-input-group>
+
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input
+                  formControlName="password"
+                  type="password"
+                  placeholder="Mot de passe"
+                  class="form-control rounded shadow-sm"
+                  [ngClass]="{'is-invalid': submitted && f['password'].invalid}"
+                />
+                <div *ngIf="submitted && f['password'].invalid" class="invalid-feedback">
+                  Le mot de passe doit contenir au moins 6 caractères.
+                </div>
+              </c-input-group>
+
+              
+
+              <div class="d-grid mb-4">
+                <button cButton color="primary" type="submit">Créer un compte</button>
+              </div>
+
+              <div *ngIf="successMessage" class="alert alert-success text-center">
+                {{ successMessage }}
+              </div>
+              <div *ngIf="errorMessage" class="alert alert-danger text-center">
+                {{ errorMessage }}
+              </div>
+              
+
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

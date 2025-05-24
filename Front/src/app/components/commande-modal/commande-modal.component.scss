@@ -1,0 +1,160 @@
+/* Style pour la boîte de dialogue */
+
+.dialog-content {
+  padding: 20px;
+  text-align: left;
+}
+
+.product-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 18px;
+  color: #4caf50;
+}
+.width_input {
+  width: 425px
+}   
+.product-stock {
+  font-size: 16px;
+  color: #f44336;
+}
+
+.quantity-field {
+  margin-top: 20px;
+  width: 100%;
+}
+
+mat-error {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+button {
+  width: 48%;
+}
+
+button[disabled] {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+button.mat-button {
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px;
+}
+
+button.mat-button.color-primary {
+  background-color: #3f51b5;
+  color: white;
+}
+
+button.mat-button.color-primary:hover {
+  background-color: #303f9f;
+}
+
+button i {
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+}
+
+button.mat-button i {
+  font-size: 16px; /* Taille de l'icône */
+}
+
+.dialog-title {
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #3f51b5;
+  margin-bottom: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    color: black;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.close-button i {
+  font-size: 20px;
+}
+
+::ng-deep .custom-dialog-container .mat-dialog-container {
+  position: relative;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 9999 !important;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px;
+}
+
+button.mat-button {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none; /* Supprime la bordure */
+  border-radius: 4px; /* Facultatif : coins arrondis */
+  min-width: auto;
+  width: auto;
+}
+
+button i {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+/* Bouton Fermer */
+.close-btn {
+  background-color: #303f9f;
+  color: white;
+  border: none;
+}
+
+.close-btn:hover {
+  background-color: #1a237e;
+}
+
+/* Bouton Commander */
+.confirm-btn {
+  background-color: #303f9f;
+  color: white;
+  border: none;
+}
+
+.confirm-btn:hover {
+  background-color: #1a237e;
+}
+
+/* Bouton désactivé */
+button[disabled] {
+  background-color: #b0bec5 !important;
+  color: white !important;
+  cursor: not-allowed;
+  border: none !important;
+}

@@ -16,7 +16,7 @@ public class LigneCommande {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference // Gestion de la relation côté "enfant" pour éviter la récursion infinie
+    @JsonBackReference // Éviter une boucle infinie
     private Commande commande;
 
     @ManyToOne

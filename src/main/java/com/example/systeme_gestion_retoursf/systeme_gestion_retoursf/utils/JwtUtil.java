@@ -16,15 +16,7 @@ public class JwtUtil {
     private final long EXPIRATION_TIME = 86400000; // 1 jour
 
 
-    // Méthode pour générer un token
-   /* public String generateToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(key)
-                .compact();
-    }*/
+
     public String generateToken(Long id, String email, String role) {
         return Jwts.builder()
                 .setSubject(email)

@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>Liste des Non-Conformités</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <div *ngIf="loading" class="text-center my-4">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading && nonConformites.length > 0" class="table-container">
+    <table mat-table [dataSource]="nonConformites" class="mat-elevation-z3">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let nc">{{ nc.id }}</td>
+      </ng-container>
+
+      <!-- Description -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let nc">{{ nc.description }}</td>
+      </ng-container>
+
+      <!-- Gravité -->
+      <ng-container matColumnDef="gravite">
+        <th mat-header-cell *matHeaderCellDef>Gravité</th>
+        <td mat-cell *matCellDef="let nc">{{ nc.gravite }}</td>
+      </ng-container>
+
+      <!-- Date -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let nc">{{ nc.date | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['id', 'description', 'gravite', 'date']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'description', 'gravite', 'date']"></tr>
+    </table>
+  </div>
+
+  <p *ngIf="!loading && nonConformites.length === 0">Aucune non-conformité trouvée.</p>
+  <p *ngIf="error" class="text-danger">{{ error }}</p>
+</mat-card>
